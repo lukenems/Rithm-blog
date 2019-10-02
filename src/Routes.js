@@ -12,7 +12,8 @@ class Routes extends Component {
           render={(props) => <PostForm addPost={this.props.addPost} {...props} />} />
 
         <Route exact path='/:id'
-          render={(props) =>
+          render={(props) => (
+            // find post matching by id
             <Post
               posts={this.props.posts}
               editPost={this.props.editPost}
@@ -20,6 +21,7 @@ class Routes extends Component {
               addComment = {this.props.addComment}
               deleteComment = {this.props.deleteComment}
               {...props} />} />
+          )
 
         <Route path='/'
           render={() => <Home posts={this.props.posts} />} />
