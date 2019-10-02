@@ -9,22 +9,33 @@ class App extends Component {
       posts: []
     }
     this.addPost = this.addPost.bind(this);
+    this.editPost = this.editPost.bind(this);
   }
 
   addPost(post) {
     this.setState(st => ({
-      posts: [...st.posts, post] 
+      posts: [...st.posts, post]
     }))
-    
   }
 
-  render() { 
-    console.log(this.state)
-  return (
-    <div className="App">
-      <Routes addPost={this.addPost} posts={this.state.posts} />
-    </div>
-  );
+  editPost(id, editedPost) {
+    this.setState(st => ({
+      posts: st.posts.map((post) => {
+        if (post.id === id) {
+          return { editedPost };
+        }
+        return post;
+      })
+    }));
+  }
+
+  render() {
+    console.log("STATE IN APP", this.state)
+    return (
+      <div className="App">
+        <Routes addPost={this.addPost} posts={this.state.posts} editPost={this.editPost} />
+      </div>
+    );
   }
 }
 

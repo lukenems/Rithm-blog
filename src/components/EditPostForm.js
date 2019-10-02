@@ -3,13 +3,14 @@ import Header from "./Header";
 import "./PostForm.css";
 import uuid from 'uuid/v4';
 
-class PostForm extends Component {
+class EditPostForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      description: "",
-      body: ""
+      title: this.props.title,
+      description: this.props.description,
+      body: this.props.body,
+      id: this.props.id
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,21 +22,14 @@ class PostForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.addPost({...this.state, id: uuid() });
-    this.setState({
-      title: "",
-      description: "",
-      body: ""
-    })
+    this.props.editPost(this.state.id, this.state);
+    this.props.toggleEditForm();
   }
-
 
   render() {
     return (
       <div>
-        <Header />
         <div id='form-container'>
-          <h1>New Post</h1>
           <form onSubmit={this.handleSubmit}>
             <div className='form-group'>
               <label htmlFor='title'>Title</label>
@@ -81,4 +75,4 @@ class PostForm extends Component {
   }
 }
 
-export default PostForm;
+export default EditPostForm;

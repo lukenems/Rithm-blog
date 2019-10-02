@@ -8,14 +8,14 @@ class Routes extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path='/new' 
-        render={() => <PostForm  addPost={this.props.addPost} />} />
+        <Route exact path='/new'
+          render={() => <PostForm addPost={this.props.addPost} />} />
 
-        <Route exact path='/:id' 
-        render={() => <Post />} />
+        <Route exact path='/:id'
+          render={(props) => <Post posts={this.props.posts} editPost={this.props.editPost} {...props} />} />
 
-        <Route path='/' 
-        render={() => <Home posts={this.props.posts} />} />
+        <Route path='/'
+          render={() => <Home posts={this.props.posts} />} />
 
       </Switch>
     );

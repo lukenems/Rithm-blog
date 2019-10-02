@@ -6,7 +6,7 @@ class TitleList extends Component {
     return (
       <div>
         {this.props.posts.map(post => (
-          <div key={post.id} className='card' style={{ width: '18rem'}} >
+          <div key={post.id} className='card' style={{ width: '18rem' }} >
             <div className='card-body'>
               <Link key={post.id} to={`/${post.id}`}>
                 <h5 className='card-title'>{post.title}</h5>
