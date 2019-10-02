@@ -14,6 +14,7 @@ class Post extends Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleNewComment = this.handleNewComment.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleDeleteComment = this.handleDeleteComment.bind(this);
   }
 
   toggleEditForm() {
@@ -34,6 +35,14 @@ class Post extends Component {
   handleNewComment(evt) {
     evt.preventDefault();
     this.props.addComment(this.props.match.params.id, this.state.comment)
+  }
+
+  handleDeleteComment(evt){
+    let post = this.props.posts.filter(post => post.id === this.props.match.params.id);
+    let commentsOfPost = post[0].comments;
+    let idx = commentsOfPost.indexOf(evt.target.value);
+  
+    this.props.deleteComment(this.props.match.params.id, idx );
   }
 
   render() {
@@ -67,7 +76,10 @@ class Post extends Component {
           <h3>Comments</h3>
           <ul>
             {comments.map(c => (
-              <li>{c}</li>
+              <li>
+                {c}
+                <button value = {c} onClick = {this.handleDeleteComment}>Delete comment</button>
+              </li>
             ))}
           </ul>
 

@@ -18,6 +18,7 @@ class Routes extends Component {
               editPost={this.props.editPost}
               deletePost={this.props.deletePost}
               addComment = {this.props.addComment}
+              deleteComment = {this.props.deleteComment}
               {...props} />} />
 
         <Route path='/'

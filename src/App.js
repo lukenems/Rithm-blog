@@ -12,6 +12,7 @@ class App extends Component {
     this.editPost = this.editPost.bind(this);
     this.deletePost = this.deletePost.bind(this);
     this.addComment = this.addComment.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
   }
 
   addPost(post) {
@@ -37,10 +38,24 @@ class App extends Component {
     })
   }
 
+  deleteComment(postId, idx) {
+    console.log("postId", postId)
+    console.log("idx", idx)
+    this.setState(st => ({
+      posts: st.posts.map((post) => {
+        if (post.id === postId) {
+          //COME BACK TO FIX THIS LATER. WE ARE DIRECTLY MODIFYING STATE - BADD!!!
+          post.comments.splice(idx, 1)
+          return { ...post, comments: post.comments }
+        }
+        return post;
+      })
+    }));
+  }
+
   addComment(id, comment) {
     this.setState(st => ({
       posts: st.posts.map((post) => {
-        console.log(post)
         if (post.id === id) {
           return { ...post, comments: [...post.comments, comment] };
         }
@@ -58,7 +73,8 @@ class App extends Component {
           posts={this.state.posts}
           editPost={this.editPost}
           deletePost={this.deletePost}
-          addComment={this.addComment} />
+          addComment={this.addComment}
+          deleteComment={this.deleteComment} />
       </div>
     );
   }
