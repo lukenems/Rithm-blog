@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import EditPostForm from './EditPostForm';
+import { Link, Redirect } from 'react-router-dom';
 
 class Post extends Component {
   constructor(props) {
     super(props);
     this.state = ({
-      editing: false
+      editing: false,
+      comment: ''
     })
     this.toggleEditForm = this.toggleEditForm.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleNewComment = this.handleNewComment.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   toggleEditForm() {
@@ -17,11 +22,26 @@ class Post extends Component {
     })
   }
 
+  handleDelete() {
+    this.props.deletePost(this.props.match.params.id)
+    this.props.history.push('/')
+  }
+
+  handleChange(evt) {
+    this.setState({ [evt.target.name]: evt.target.value });
+  }
+
+  handleNewComment(evt) {
+    evt.preventDefault();
+    this.props.addComment(this.props.match.params.id, this.state.comment)
+  }
+
   render() {
     console.log("props in post.js", this.props);
     let post = this.props.posts.filter(post => post.id === this.props.match.params.id);
     console.log("this is post", post);
-    let { title, description, body, id } = post[0];
+
+    let { title, description, body, id, comments } = post[0];
 
     return (
       <div>
@@ -31,7 +51,7 @@ class Post extends Component {
           <h4>{description}</h4>
           <h5>{body}</h5>
           <button onClick={this.toggleEditForm} >Edit</button>
-          <button>Delete</button>
+          <button onClick={this.handleDelete}>Delete</button>
         </div>
         {this.state.editing ?
           <EditPostForm
@@ -42,6 +62,32 @@ class Post extends Component {
             editPost={this.props.editPost}
             toggleEditForm={this.toggleEditForm} />
           : null}
+
+        <div className="postCommentForm">
+          <h3>Comments</h3>
+          <ul>
+            {comments.map(c => (
+              <li>{c}</li>
+            ))}
+          </ul>
+
+          <form onSubmit={this.handleNewComment}>
+            <div className='form-group'>
+              <label htmlFor='comment'>Add a comment</label>
+              <input
+                onChange={this.handleChange}
+                name='comment'
+                type='text'
+                id='comment'
+                value={this.state.comment}
+                className='form-control'
+              ></input>
+              <button className="btn btn-primary" type="submit">Submit comment</button>
+            </div>
+          </form>
+
+        </div>
+
       </div>
     );
   }
