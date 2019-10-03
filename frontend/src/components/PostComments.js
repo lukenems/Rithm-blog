@@ -13,7 +13,7 @@ class PostComments extends Component {
 
   handleNewComment(evt) {
     evt.preventDefault();
-    this.props.addComment(this.props.postId, this.state.comment)
+    this.props.addComment({postId: this.props.postId, comment: this.state.comment})
   }
 
   handleDeleteComment(evt){
@@ -30,9 +30,10 @@ class PostComments extends Component {
 
 
   render() {
-    let post = this.props.posts.filter(post => post.id === this.props.postId);
-    let { comments } = post[0]
+    console.log("props in Post Comments -->", this.props)
+    let comments = this.props.postComments;
     return (
+      // displaying the comments
       <div className="postCommentForm">
           <h3>Comments</h3>
           <ul>
@@ -43,7 +44,7 @@ class PostComments extends Component {
               </li>
             ))}
           </ul>
-
+        {/* form for the comments */}
           <form onSubmit={this.handleNewComment}>
             <div className='form-group'>
               <label htmlFor='comment'>Add a comment</label>

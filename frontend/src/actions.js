@@ -27,10 +27,10 @@ export function deletePost(id) {
   };
 }
 
-export function addComment(comment) {
+export function addComment(data) {
   return {
     type: ADD_COMMENT,
-    payload: comment
+    payload: data
   };
 }
 

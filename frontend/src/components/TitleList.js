@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 
 class TitleList extends Component {
   render() {
+    console.log("props in titlelist", this.props)
     return (
       <div>
-        {this.props.posts.map(post => (
+        {this.props.titles.map(post => (
           <div key={post.id} className='card' style={{ width: '18rem' }} >
             <div className='card-body'>
               <Link key={post.id} to={`/${post.id}`}>

@@ -31,12 +31,12 @@ class Post extends Component {
 
   render() {
     console.log("props in post.js", this.props);
-    let post = this.props.posts.filter(
-      post => post.id === this.props.match.params.id
-    );
-    console.log("this is post", post);
+    // let post = this.props.titles.filter(
+    //   post => post.id === this.props.match.params.id
+    // );
+    // console.log("this is post", post);
 
-    let { title, description, body, id } = post[0];
+    let { title, description, body, id, comments } = this.props.post[0];
 
     return (
       <div>
@@ -50,18 +50,16 @@ class Post extends Component {
         </div>
         {this.state.editing ? (
           <EditPostForm
-            title={title}
-            description={description}
-            body={body}
-            id={id}
+            post={this.props.post[0]}
             editPost={this.props.editPost}
             toggleEditForm={this.toggleEditForm}
           />
         ) : null}
         <PostComments
-          posts={this.props.posts}
+          // posts={this.props.posts}
           addComment={this.props.addComment}
           deleteComment={this.props.deleteComment}
+          postComments = {comments}
           postId={id}
         />
       </div>

@@ -7,10 +7,10 @@ class EditPostForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: this.props.title,
-      description: this.props.description,
-      body: this.props.body,
-      id: this.props.id
+      title: this.props.post.title,
+      description: this.props.post.description,
+      body: this.props.post.body,
+      id: this.props.post.id
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,11 +22,12 @@ class EditPostForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.editPost(this.state.id, this.state);
+    this.props.editPost(this.state);
     this.props.toggleEditForm();
   }
 
   render() {
+    console.log("props in editPost", this.props)
     return (
       <div>
         <div id='form-container'>
