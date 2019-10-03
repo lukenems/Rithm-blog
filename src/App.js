@@ -8,17 +8,10 @@ class App extends Component {
     this.state = {
       posts: []
     }
-    this.addPost = this.addPost.bind(this);
     this.editPost = this.editPost.bind(this);
     this.deletePost = this.deletePost.bind(this);
     this.addComment = this.addComment.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
-  }
-
-  addPost(post) {
-    this.setState(st => ({
-      posts: [...st.posts, post]
-    }))
   }
 
   editPost(id, editedPost) {

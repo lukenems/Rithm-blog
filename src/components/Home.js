@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import Header from './Header';
-import TitleList from './TitleList';
+import TitleListContainer from '../containers/TitleListContainer';
 
 class Home extends Component {
   render() {
     return (
       <div>
         <Header />
-        <TitleList posts={this.props.posts} />
+        <TitleListContainer  />
       </div>
     );
   }

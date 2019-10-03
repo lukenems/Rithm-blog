@@ -21,12 +21,7 @@ class PostForm extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.addPost({...this.state, id: uuid(), comments: [] });
-    this.setState({
-      title: "",
-      description: "",
-      body: ""
-    })
+    this.props.addPost({...this.state, id: uuid(), comments: {} });
     this.props.history.push('/')
   }
 
