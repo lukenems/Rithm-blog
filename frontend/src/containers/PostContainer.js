@@ -1,20 +1,23 @@
 import { connect } from "react-redux";
 import Post from "../components/Post";
 import { deletePost, editPost, addComment, deleteComment } from "../actions";
+import { fetchPostFromApi } from '../actionCreators';
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state, ownProps) {
 
-  let post = state.titles.filter(post => (
-    post.id === props.match.params.id
-  ))
+  // let post = state.posts[props.match.params.id]
+  // .filter(post => (
+  //   post.id === props.match.params.id
+  // ))
   return {
-    post
+    posts: state.posts,
+    id: ownProps.match.params.id
   };
 }
 
 const connectedComponent = connect(
   mapStateToProps,
-  { deletePost, editPost, addComment, deleteComment}
+  { deletePost, editPost, addComment, deleteComment, fetchPostFromApi}
 );
 
 export default connectedComponent(Post);

@@ -3,7 +3,8 @@ import {
   EDIT_POST,
   DELETE_POST,
   ADD_COMMENT,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  FETCH_POST
 } from "./actionTypes.js";
 
 const INITIAL_STATE = { posts: {}, titles: [] };
@@ -13,7 +14,6 @@ function rootReducer(state = INITIAL_STATE, action) {
 
   switch (action.type) {
     case ADD_POST:
-      const postId = action.payload.id;
       return {
         ...state, titles:
           [...state.titles, action.payload]
@@ -48,7 +48,7 @@ function rootReducer(state = INITIAL_STATE, action) {
         ))
       };
 
-    case DELETE_COMMENT:
+    // case DELETE_COMMENT:
       // return {
       //   ...state,
       //   titles: state.titles.map(post => (
@@ -57,6 +57,14 @@ function rootReducer(state = INITIAL_STATE, action) {
       //       : post
       //   ))
       // };
+
+      case FETCH_POST:
+        let allPosts = {...state.posts};
+        allPosts[action.payload.id] = action.payload;
+        return {
+          titles: state.titles,
+          posts: allPosts
+         }
 
     default:
       return state;
