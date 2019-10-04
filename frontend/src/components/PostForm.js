@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import "./PostForm.css";
-import uuid from 'uuid/v4';
+// import uuid from 'uuid/v4';
 
 class PostForm extends Component {
   constructor(props) {
@@ -19,9 +19,9 @@ class PostForm extends Component {
     this.setState({ [evt.target.name]: evt.target.value });
   }
 
-  handleSubmit(evt) {
+  async handleSubmit(evt) {
     evt.preventDefault();
-    this.props.addPost({...this.state, id: uuid(), comments: [] });
+    await this.props.addPostToApi(this.state);
     this.props.history.push('/')
   }
 

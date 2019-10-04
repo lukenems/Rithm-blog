@@ -4,6 +4,7 @@ import { deletePost, editPost, addComment, deleteComment } from "../actions";
 import { fetchPostFromApi } from '../actionCreators';
 
 function mapStateToProps(state, ownProps) {
+  console.log("HOW ABOUT THIS GUY", state)
 
   // let post = state.posts[props.match.params.id]
   // .filter(post => (

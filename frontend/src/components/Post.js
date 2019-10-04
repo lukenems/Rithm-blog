@@ -16,14 +16,7 @@ class Post extends Component {
   }
 
   async componentDidMount() {
-    console.log("props before api call", this.props);
     await this.props.fetchPostFromApi(this.props.id);
-    console.log(
-      "props after api call",
-      this.props,
-      "this is state==>",
-      this.state
-    );
     this.setState({ loading: false });
   }
 
@@ -44,7 +37,7 @@ class Post extends Component {
 
   render() {
     console.log("props in post.js", this.props);
-    // let id = parseInt(this.props.posts[1].id)
+    let id = parseInt(this.props.id)
     // let { title, description, body, comments } = this.props.posts[1];
 
     return (
@@ -54,9 +47,9 @@ class Post extends Component {
           <div>
             <Header />
             <div className='postContainer'>
-              <h1>{this.props.posts[1].title}</h1>
-              <h4>{this.props.posts[1].description}</h4>
-              <h5>{this.props.posts[1].body}</h5>
+              <h1>{this.props.posts[id].title}</h1>
+              <h4>{this.props.posts[id].description}</h4>
+              <h5>{this.props.posts[id].body}</h5>
               <button onClick={this.toggleEditForm}>Edit</button>
               <button onClick={this.handleDelete}>Delete</button>
             </div>
@@ -71,8 +64,8 @@ class Post extends Component {
               // posts={this.props.posts}
               addComment={this.props.addComment}
               deleteComment={this.props.deleteComment}
-              postComments={this.props.posts[1].comments}
-              postId={this.props.posts[1].id}
+              postComments={this.props.posts[id].comments}
+              postId={this.props.posts[id].id}
             /> */}
           </div>
     );

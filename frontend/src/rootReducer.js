@@ -4,7 +4,8 @@ import {
   DELETE_POST,
   ADD_COMMENT,
   DELETE_COMMENT,
-  FETCH_POST
+  FETCH_POST,
+  FETCH_POSTS
 } from "./actionTypes.js";
 
 const INITIAL_STATE = { posts: {}, titles: [] };
@@ -14,10 +15,12 @@ function rootReducer(state = INITIAL_STATE, action) {
 
   switch (action.type) {
     case ADD_POST:
+      let posts = { ...state.posts }
+      posts[action.payload.id] = action.payload;
+      posts[action.payload.id].comments = [];
       return {
-        ...state, titles:
-          [...state.titles, action.payload]
-
+        titles: state.titles,
+        posts
       }
 
     case EDIT_POST:
@@ -49,22 +52,32 @@ function rootReducer(state = INITIAL_STATE, action) {
       };
 
     // case DELETE_COMMENT:
-      // return {
-      //   ...state,
-      //   titles: state.titles.map(post => (
-      //     post.id === action.payload.postId
-      //       ? { ...post, comments: [...post.comments, action.payload.comment] }
-      //       : post
-      //   ))
-      // };
+    // return {
+    //   ...state,
+    //   titles: state.titles.map(post => (
+    //     post.id === action.payload.postId
+    //       ? { ...post, comments: [...post.comments, action.payload.comment] }
+    //       : post
+    //   ))
+    // };
 
-      case FETCH_POST:
-        let allPosts = {...state.posts};
-        allPosts[action.payload.id] = action.payload;
-        return {
-          titles: state.titles,
-          posts: allPosts
-         }
+    case FETCH_POST:
+      let savedPosts = { ...state.posts };
+      console.log("savedPosts --->", savedPosts)
+      savedPosts[action.payload.id] = action.payload;
+      console.log("savedPosts after we add another--->", savedPosts)
+      return {
+        titles: state.titles,
+        posts: savedPosts
+      }
+
+    case FETCH_POSTS:
+      return {
+        titles: action.payload,
+        posts: state.posts
+      }
+
+
 
     default:
       return state;

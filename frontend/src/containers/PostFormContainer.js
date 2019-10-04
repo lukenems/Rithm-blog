@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { addPost } from "../actions";
 import PostForm from "../components/PostForm";
+import { addPostToApi } from '../actionCreators';
 
 function mapStateToProps(state) {
   return {
@@ -10,7 +11,7 @@ function mapStateToProps(state) {
 
 const connectedComponent = connect(
   mapStateToProps,
-  { addPost }
+  { addPost, addPostToApi }
 );
 
 export default connectedComponent(PostForm);
