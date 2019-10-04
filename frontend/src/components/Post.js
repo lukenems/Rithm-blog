@@ -16,7 +16,9 @@ class Post extends Component {
   }
 
   async componentDidMount() {
-    await this.props.fetchPostFromApi(this.props.id);
+    if (!this.props.posts[this.props.id]) {
+      await this.props.fetchPostFromApi(this.props.id);
+    }
     this.setState({ loading: false });
   }
 
@@ -41,33 +43,33 @@ class Post extends Component {
     // let { title, description, body, comments } = this.props.posts[1];
 
     return (
-        this.state.loading ? 
-          <div>Loading...</div>
-         : 
-          <div>
-            <Header />
-            <div className='postContainer'>
-              <h1>{this.props.posts[id].title}</h1>
-              <h4>{this.props.posts[id].description}</h4>
-              <h5>{this.props.posts[id].body}</h5>
-              <button onClick={this.toggleEditForm}>Edit</button>
-              <button onClick={this.handleDelete}>Delete</button>
-            </div>
-            {this.state.editing ? 
-              <EditPostForm
-                post={this.props.post[0]}
-                editPost={this.props.editPost}
-                toggleEditForm={this.toggleEditForm}
-              />
-             : null}
-            {/* <PostComments
+      this.state.loading ?
+        <div>Loading...</div>
+        :
+        <div>
+          <Header />
+          <div className='postContainer'>
+            <h1>{this.props.posts[id].title}</h1>
+            <h4>{this.props.posts[id].description}</h4>
+            <h5>{this.props.posts[id].body}</h5>
+            <button onClick={this.toggleEditForm}>Edit</button>
+            <button onClick={this.handleDelete}>Delete</button>
+          </div>
+          {this.state.editing ?
+            <EditPostForm
+              post={this.props.post[0]}
+              editPost={this.props.editPost}
+              toggleEditForm={this.toggleEditForm}
+            />
+            : null}
+          {/* <PostComments
               // posts={this.props.posts}
               addComment={this.props.addComment}
               deleteComment={this.props.deleteComment}
               postComments={this.props.posts[id].comments}
               postId={this.props.posts[id].id}
             /> */}
-          </div>
+        </div>
     );
   }
 }
