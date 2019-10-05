@@ -15,40 +15,52 @@ function rootReducer(state = INITIAL_STATE, action) {
 
   switch (action.type) {
     case ADD_POST:
-      let posts = { ...state.posts }
+      const posts = { ...state.posts };
       posts[action.payload.id] = action.payload;
       posts[action.payload.id].comments = [];
       return {
         titles: state.titles,
         posts
-      }
+      };
 
     case EDIT_POST:
+      const updatePosts = { ...state.posts };
+      const { title, description, body } = action.payload;
+
+      updatePosts[action.payload.id] = {
+        ...updatePosts[action.payload.id],
+        title,
+        description,
+        body
+      };
       return {
-        ...state, titles: state.titles.map(post => {
-          if (post.id === action.payload.id) {
-            return action.payload
-          }
-        })
-      }
+        titles: state.titles,
+        posts: updatePosts
+      };
 
     case DELETE_POST:
+      const postDeleted = { ...state.posts };
+      delete postDeleted[action.payload.id];
+
+      const updatedTitles = state.titles.filter(
+        title => action.payload.id !== title.id
+      );
       return {
-        ...state, titles:
-          state.titles.filter(post => (
-            post.id !== action.payload
-          ))
-      }
+        titles: updatedTitles,
+        posts: postDeleted
+      };
 
     case ADD_COMMENT:
-      console.log("action in addcomment reducer", action)
+      const postAddedComment = { ...state.posts };
+      const { postId, comment } = action.payload;
+
+      postAddedComment[postId].comments = [
+        ...postAddedComment[postId].comments,
+        comment
+      ];
       return {
-        ...state,
-        titles: state.titles.map(post => (
-          post.id === action.payload.postId
-            ? { ...post, comments: [...post.comments, action.payload.comment] }
-            : post
-        ))
+        titles: state.titles,
+        posts: postAddedComment
       };
 
     // case DELETE_COMMENT:
@@ -63,21 +75,17 @@ function rootReducer(state = INITIAL_STATE, action) {
 
     case FETCH_POST:
       let savedPosts = { ...state.posts };
-      console.log("savedPosts --->", savedPosts)
       savedPosts[action.payload.id] = action.payload;
-      console.log("savedPosts after we add another--->", savedPosts)
       return {
         titles: state.titles,
         posts: savedPosts
-      }
+      };
 
     case FETCH_POSTS:
       return {
         titles: action.payload,
         posts: state.posts
-      }
-
-
+      };
 
     default:
       return state;

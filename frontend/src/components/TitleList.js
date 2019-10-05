@@ -17,7 +17,6 @@ class TitleList extends Component {
   }
 
   render() {
-    console.log("props in titlelist", this.props)
     return (
       this.state.loading ? <div>Loading ...</div> :
         <div>

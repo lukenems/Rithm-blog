@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import EditPostForm from "./EditPostForm";
-import PostComments from "./PostComments";
+import PostCommentsContainer from "../containers/PostCommentsContainer";
 
 class Post extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class Post extends Component {
   }
 
   handleDelete() {
-    this.props.deletePost(this.props.match.params.id);
+    this.props.deletePostAtApi(this.props.match.params.id);
     this.props.history.push("/");
   }
 
@@ -39,37 +39,29 @@ class Post extends Component {
 
   render() {
     console.log("props in post.js", this.props);
-    let id = parseInt(this.props.id)
-    // let { title, description, body, comments } = this.props.posts[1];
+    let id = parseInt(this.props.id);
 
-    return (
-      this.state.loading ?
-        <div>Loading...</div>
-        :
-        <div>
-          <Header />
-          <div className='postContainer'>
-            <h1>{this.props.posts[id].title}</h1>
-            <h4>{this.props.posts[id].description}</h4>
-            <h5>{this.props.posts[id].body}</h5>
-            <button onClick={this.toggleEditForm}>Edit</button>
-            <button onClick={this.handleDelete}>Delete</button>
-          </div>
-          {this.state.editing ?
-            <EditPostForm
-              post={this.props.post[0]}
-              editPost={this.props.editPost}
-              toggleEditForm={this.toggleEditForm}
-            />
-            : null}
-          {/* <PostComments
-              // posts={this.props.posts}
-              addComment={this.props.addComment}
-              deleteComment={this.props.deleteComment}
-              postComments={this.props.posts[id].comments}
-              postId={this.props.posts[id].id}
-            /> */}
+    return this.state.loading ? (
+      <div>Loading...</div>
+    ) : (
+      <div>
+        <Header />
+        <div className='postContainer'>
+          <h1>{this.props.posts[id].title}</h1>
+          <h4>{this.props.posts[id].description}</h4>
+          <h5>{this.props.posts[id].body}</h5>
+          <button onClick={this.toggleEditForm}>Edit</button>
+          <button onClick={this.handleDelete}>Delete</button>
         </div>
+        {this.state.editing ? (
+          <EditPostForm
+            post={this.props.posts[id]}
+            editPost={this.props.editPostAtApi}
+            toggleEditForm={this.toggleEditForm}
+          />
+        ) : null}
+        <PostCommentsContainer props={this.props} />
+      </div>
     );
   }
 }
