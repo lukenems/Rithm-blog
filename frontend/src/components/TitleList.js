@@ -19,9 +19,9 @@ class TitleList extends Component {
   render() {
     return (
       this.state.loading ? <div>Loading ...</div> :
-        <div>
+        <div className={'container'}>
           {this.props.titles.map(post => (
-            <div key={post.id} className='card' style={{ width: '18rem' }} >
+            <div key={post.id} className={'card mt-2'} style={{ width: '18rem' }} >
               <div className='card-body'>
                 <Link key={post.id} to={`/${post.id}`}>
                   <h5 className='card-title'>{post.title}</h5>
