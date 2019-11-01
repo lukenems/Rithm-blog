@@ -11,8 +11,6 @@ import {
 const INITIAL_STATE = { posts: {}, titles: [] };
 
 function rootReducer(state = INITIAL_STATE, action) {
-  console.log("reducer ran; state & action:", state, action);
-
   switch (action.type) {
     case ADD_POST:
       const posts = { ...state.posts };
@@ -63,15 +61,18 @@ function rootReducer(state = INITIAL_STATE, action) {
         posts: postAddedComment
       };
 
-    // case DELETE_COMMENT:
-    // return {
-    //   ...state,
-    //   titles: state.titles.map(post => (
-    //     post.id === action.payload.postId
-    //       ? { ...post, comments: [...post.comments, action.payload.comment] }
-    //       : post
-    //   ))
-    // };
+    case DELETE_COMMENT:
+      const commentsOnPost = state.posts[action.payload.postId].comments;
+      const removedComment = commentsOnPost.filter(
+        comment => comment.id != action.payload.commentId
+      );
+      const statePosts = { ...state.posts };
+
+      statePosts[action.payload.postId].comments = [...removedComment];
+      return {
+        titles: state.titles,
+        posts: statePosts
+      };
 
     case FETCH_POST:
       let savedPosts = { ...state.posts };

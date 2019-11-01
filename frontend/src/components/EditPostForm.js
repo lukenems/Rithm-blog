@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import Header from "./Header";
 import "./PostForm.css";
-import uuid from 'uuid/v4';
 
 class EditPostForm extends Component {
   constructor(props) {
@@ -27,7 +25,6 @@ class EditPostForm extends Component {
   }
 
   render() {
-    console.log("props in editPost", this.props)
     return (
       <div>
         <div id='form-container'>

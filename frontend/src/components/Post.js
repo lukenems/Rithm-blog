@@ -38,7 +38,6 @@ class Post extends Component {
   }
 
   render() {
-    console.log("props in post.js", this.props);
     let id = parseInt(this.props.id);
 
     return this.state.loading ? (
@@ -46,12 +45,22 @@ class Post extends Component {
     ) : (
       <div>
         <Header />
-        <div className='postContainer'>
+        <div className='postContainer container mt-2'>
           <h1>{this.props.posts[id].title}</h1>
           <h4>{this.props.posts[id].description}</h4>
           <h5>{this.props.posts[id].body}</h5>
-          <button onClick={this.toggleEditForm}>Edit</button>
-          <button onClick={this.handleDelete}>Delete</button>
+          <button
+            className={"btn btn-warning btn-sm mr-3"}
+            onClick={this.toggleEditForm}
+          >
+            <i className='material-icons'>edit</i>
+          </button>
+          <button
+            className={"btn btn-danger btn-sm"}
+            onClick={this.handleDelete}
+          >
+            <i className='material-icons'>delete_forever</i>
+          </button>
         </div>
         {this.state.editing ? (
           <EditPostForm

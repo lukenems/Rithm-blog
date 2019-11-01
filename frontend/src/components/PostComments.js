@@ -20,10 +20,7 @@ class PostComments extends Component {
   }
 
   handleDeleteComment(evt) {
-    const post = this.props.posts.filter(post => post.id === this.props.postId);
-    const commentsOfPost = post[0].comments;
-    const idx = commentsOfPost.indexOf(evt.target.value);
-
+    const idx = evt.target.value;
     this.props.deleteComment(this.props.postId, idx);
   }
 
@@ -32,32 +29,38 @@ class PostComments extends Component {
   }
 
   render() {
-    console.log("props in Post Comments -->", this.props);
     const id = this.props.postId;
     const comments = this.props.posts[id].comments;
 
     return (
       // displaying the comments
-      <div className='postCommentForm'>
+      <div className={"mt-3 container"}>
         <h3>Comments</h3>
-        <ul>
+        <ul
+          className={
+            "list-group list-group-flush w-75 p-1.5 border border-secondary border-top-0 border-bottom-0 rounded"
+          }
+        >
           {comments.map(c => (
-            <li key={c.id}>
+            <li
+              className={"list-group-item d-flex justify-content-between"}
+              key={c.id}
+            >
               {c.text}
               <button
-                className='btn btn-sm'
-                value={c.text}
+                className={"btn btn-danger btn-sm"}
+                value={c.id}
                 onClick={this.handleDeleteComment}
               >
-                Delete comment
+                <i className='material-icons'>delete_forever</i>
               </button>
             </li>
           ))}
         </ul>
         {/* form for the comments */}
         <form onSubmit={this.handleNewComment}>
-          <div className='form-group'>
-            <label htmlFor='comment'>Add a comment</label>
+          <div className={"postCommentForm form-group w-75 mt-2"}>
+            <label htmlFor={"comment"}>Add a comment</label>
             <input
               onChange={this.handleChange}
               name='comment'
@@ -66,7 +69,7 @@ class PostComments extends Component {
               value={this.state.comment}
               className='form-control'
             ></input>
-            <button className='btn btn-primary' type='submit'>
+            <button className={"btn btn-primary mt-2"} type='submit'>
               Submit comment
             </button>
           </div>

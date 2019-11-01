@@ -34,9 +34,9 @@ export function addComment(data) {
   };
 }
 
-export function deleteComment(id) {
+export function deleteComment(id, commentId) {
     return {
       type: DELETE_COMMENT,
-      payload: id
+      payload: {postId: id, commentId}
     };
   }

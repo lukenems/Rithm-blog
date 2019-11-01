@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import "./PostForm.css";
-// import uuid from 'uuid/v4';
 
 class PostForm extends Component {
   constructor(props) {
@@ -22,9 +21,8 @@ class PostForm extends Component {
   async handleSubmit(evt) {
     evt.preventDefault();
     await this.props.addPostToApi(this.state);
-    this.props.history.push('/')
+    this.props.history.push("/");
   }
-
 
   render() {
     return (
