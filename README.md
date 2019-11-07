@@ -2,7 +2,7 @@
 
 ## This project uses React, React-Redux, React-Router, and Thunks
 
-### Will launch this project soon, will provide a url when it it's up and running!
+### Will launch this project soon and provide a url when it's up and running!
 
 For now please clone the entire repository
 
