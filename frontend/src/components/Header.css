@@ -1,5 +1,6 @@
 .header {
-  background-color: silver;
+  background: radial-gradient(circle,  #da942a, #1f5d78);
   display: block;
   text-align: center;
+  border-radius: 15px;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "./TitleList.css";
 
 class TitleList extends Component {
   constructor(props) {
@@ -19,14 +20,14 @@ class TitleList extends Component {
   render() {
     return (
       this.state.loading ? <div>Loading ...</div> :
-        <div className={'container'}>
+        <div className={'container posts'}>
           {this.props.titles.map(post => (
             <div key={post.id} className={'card mt-2'} style={{ width: '18rem' }} >
-              <div className='card-body'>
+              <div className={'card-body'} style={{ borderRadius: '15px' }}>
                 <Link key={post.id} to={`/${post.id}`}>
-                  <h5 className='card-title'>{post.title}</h5>
+                  <h5 className={'card-title'}>{post.title}</h5>
                 </Link>
-                <h6 className='card-subtitle mb-2 text-muted'>{post.description}</h6>
+                <h6 className={'card-subtitle mb-2 text-muted'}>{post.description}</h6>
               </div>
             </div>
           ))}

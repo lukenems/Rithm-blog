@@ -29,7 +29,7 @@ class PostForm extends Component {
       <div>
         <Header />
         <div id='form-container'>
-          <h1>New Post</h1>
+          <h1 style={{color: '#eee'}}>New Post</h1>
           <form onSubmit={this.handleSubmit}>
             <div className='form-group'>
               <label htmlFor='title'>Title</label>

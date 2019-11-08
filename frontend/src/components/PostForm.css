@@ -7,3 +7,7 @@
 #form-container form {
   width: 50%;
 }
+
+label {
+  color: #eee;
+}

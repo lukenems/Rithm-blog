@@ -35,7 +35,7 @@ class PostComments extends Component {
     return (
       // displaying the comments
       <div className={"mt-3 container"}>
-        <h3>Comments</h3>
+        <h3 style={{color: '#eee'}}>Comments</h3>
         <ul
           className={
             "list-group list-group-flush w-75 p-1.5 border border-secondary border-top-0 border-bottom-0 rounded"

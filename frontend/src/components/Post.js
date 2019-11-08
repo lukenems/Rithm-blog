@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Header from "./Header";
+import "./Post.css"
 import EditPostForm from "./EditPostForm";
 import PostCommentsContainer from "../containers/PostCommentsContainer";
 
@@ -45,10 +46,12 @@ class Post extends Component {
     ) : (
       <div>
         <Header />
-        <div className='postContainer container mt-2'>
+        <div className='post-container container mt-2'>
           <h1>{this.props.posts[id].title}</h1>
           <h4>{this.props.posts[id].description}</h4>
           <h5>{this.props.posts[id].body}</h5>
+        </div>
+        <div className="post-buttons container d-flex justify-content-end">
           <button
             className={"btn btn-warning btn-sm mr-3"}
             onClick={this.toggleEditForm}
