@@ -2,6 +2,8 @@
 
 ## This project uses React, React-Redux, React-Router, and Thunks
 
+![Image](/blog_screen.png?raw=true)
+
 ### Will launch this project soon and provide a url when it's up and running!
 
 For now please clone the entire repository
@@ -14,7 +16,7 @@ For now please clone the entire repository
 
 ## Backend
 
-1. `cd`into backend
+1. `cd` into backend
 2.  run `psql < schema.sql` - will create microblog db
 3.  `npm install`
 4.  `nodemon` - starts server on Port 5000
